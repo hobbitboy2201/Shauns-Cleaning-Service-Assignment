@@ -23,6 +23,10 @@ namespace Shauns_Cleaning_Service_Assignment
 
         public enum StaffType
         {
+            MAINTENANCE,
+            CLEANING,
+            BOOKING,
+            ADMIN
         }
     }
 }

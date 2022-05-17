@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Sharprompt;
 
 namespace Shauns_Cleaning_Service_Assignment
 {
@@ -10,7 +11,9 @@ namespace Shauns_Cleaning_Service_Assignment
     {
         static void Main(string[] args)
         {
+            CleaningSystem cs = new CleaningSystem("Shaun Cleans");
 
+            
         }
     }
 }

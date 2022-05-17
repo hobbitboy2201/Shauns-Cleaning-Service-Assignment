@@ -6,6 +6,11 @@
     <RootNamespace>Shauns_Cleaning_Service_Assignment</RootNamespace>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <StartupObject>Shauns_Cleaning_Service_Assignment.CLI</StartupObject>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Sharprompt" Version="2.4.1" />
+  </ItemGroup>
 
 </Project>

@@ -7,22 +7,20 @@ using static Shauns_Cleaning_Service_Assignment.Enums;
 
 namespace Shauns_Cleaning_Service_Assignment
 {
-    public class Booking : IPerson, IStaff
+    public class Booking : IPerson
     {
         public Guid Id { get; set; }
         public string Fname { get; set; }
         public string Lname { get; set; }
-        public string Username { get; set; }
-        public string Password { get; set; }
+        public IStaff Staff { get; set; }
         public StaffType Type { get; set; }
 
-        public Booking(string fname, string lname, string username, string password)
+        public Booking(string fname, string lname, IStaff staff)
         {
             Id = Guid.NewGuid();
             Fname = fname;
             Lname = lname;
-            Username = username;
-            Password = password;
+            Staff = staff;
             Type = StaffType.BOOKING;
         }
     }

@@ -7,7 +7,7 @@ using static Shauns_Cleaning_Service_Assignment.Enums;
 
 namespace Shauns_Cleaning_Service_Assignment
 {
-    internal interface IStaff
+    public interface IStaff
     {
         public string Username { get; set; }
         public string Password { get; set; }

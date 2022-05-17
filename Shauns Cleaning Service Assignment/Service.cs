@@ -11,7 +11,7 @@ namespace Shauns_Cleaning_Service_Assignment
     {
         public Guid Id { get; }
         public string ServiceName { get; set; }
-        public DateTime Timestamp { get; set; }
+        public DateTime CreatedOn { get; set; }
         public bool Open { get; set; }
         List<Purchase> PurchaseList { get; set; }
     }

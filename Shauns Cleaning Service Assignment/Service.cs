@@ -13,5 +13,6 @@ namespace Shauns_Cleaning_Service_Assignment
         public string ServiceName { get; set; }
         public DateTime Timestamp { get; set; }
         public bool Open { get; set; }
+        List<Purchase> PurchaseList { get; set; }
     }
 }

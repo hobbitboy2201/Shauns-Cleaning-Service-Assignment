@@ -12,15 +12,17 @@ namespace Shauns_Cleaning_Service_Assignment
         public Guid Id { get; set; }
         public string Fname { get; set; }
         public string Lname { get; set; }
-        public IStaff Staff { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
         public StaffType Type { get; set; }
 
-        public Booking(string fname, string lname, IStaff staff)
+        public Booking(string fname, string lname, string username, string password)
         {
             Id = Guid.NewGuid();
             Fname = fname;
             Lname = lname;
-            Staff = staff;
+            Username = username;
+            Password = password;
             Type = StaffType.BOOKING;
         }
     }

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Sharprompt;
+using  static Shauns_Cleaning_Service_Assignment.Enums;
 
 namespace Shauns_Cleaning_Service_Assignment
 {
@@ -13,10 +14,27 @@ namespace Shauns_Cleaning_Service_Assignment
         {
             CleaningSystem cs = new CleaningSystem("Shaun Cleans");
 
-            MainMenu();
+            List<Admin> Admins = new List<Admin>();
+            List<Cleaning> Cleaners = new List<Cleaning>();
+            List<Customer> Customers = new List<Customer>();
+            List<Building> Buildings = new List<Building>();
+            List<Maintenance> Maintenance = new List<Maintenance>();
+            List<Purchase>  Purchases = new List<Purchase>();
+            List<MajorProblem> MajorProblems = new List<MajorProblem>();
+            List<MinorProblem> MinorProblems = new List<MinorProblem>();
+            List<Booking> Bookings = new List<Booking>();
+            List<TimeLog> TimeLogs = new List<TimeLog>();
+
+            MainMenu(Admins, Bookings, Cleaners);
+            AddStaffMember(Admins, Bookings, Cleaners);
+            AddStaffMember(Admins, Bookings, Cleaners);
+            AddStaffMember(Admins, Bookings, Cleaners);
+
+            foreach (Admin admin in Admins)
+                Console.WriteLine($"{admin.Fname} {admin.Lname} Username: {admin.Username}");
         }
 
-        static void MainMenu()
+        static void MainMenu(List<Admin> AdminList, List<Booking> BookingList, List<Cleaning> CleaningList)
         {
             string[] Options =
             {
@@ -25,6 +43,7 @@ namespace Shauns_Cleaning_Service_Assignment
                 "Update information",
                 "View time log",
                 "View purchases",
+                "Add Staff Member",
                 "Quit"
             };
 
@@ -50,18 +69,49 @@ namespace Shauns_Cleaning_Service_Assignment
                 case ("Quit"):
                     Console.WriteLine("Quit");
                     break;
+                case ("Add Staff Member"):
+                    AddStaffMember(AdminList, BookingList, CleaningList);
+                    break;
             }
         }
 
-        static void AddBooking()
+        static void AddStaffMember(List<Admin> AdminList, List<Booking> BookingList, List<Cleaning> CleaningList)
         {
-            string Fname = Prompt.Input<string>("What is the staff members first name");
-            string Lname = Prompt.Input<string>("What is the staff members last name");
 
-            string Username = Prompt.Input<string>("What is the staff members username");
-            string Password = Prompt.Input<string>("What is the staff members password");
+            string[] StaffTypes =
+            {
+                "Admin",
+                "Cleaning",
+                "Booking"
+            };
 
-            Booking NewBooking = new Booking(Fname, Lname, Username, Password);
+            string FirstName = Prompt.Input<string>("Staff First Name");
+            string LastName = Prompt.Input<string>("Staff Last Name");
+            string Username = Prompt.Input<string>("Staff Username");
+            string Password = Prompt.Input<string>("Staff Password");
+
+            string StaffOptions = Prompt.Select("What type of staff member are you adding?", StaffTypes);
+
+            switch (StaffOptions)
+            {
+                case ("Admin"):
+                    Admin NewAdmin = new Admin(FirstName, LastName, Username, Password);
+                    AdminList.Add(NewAdmin);
+                    break;
+                case ("Cleaning"):
+                    Cleaning NewCleaning = new Cleaning(FirstName, LastName, Username, Password);
+                    CleaningList.Add(NewCleaning);
+                    break;
+                case ("Booking"):
+                    Booking NewBooking = new Booking(FirstName, LastName, Username, Password);
+                    BookingList.Add(NewBooking);
+                    break;
+            }
+        }
+
+        static void AddNewPurchase(List<Admin> AdminList, List<Booking> BookingList, List<Cleaning> CleaningList)
+        {
+
         }
     }
 }

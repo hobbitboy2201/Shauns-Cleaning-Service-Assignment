@@ -25,6 +25,8 @@ namespace Shauns_Cleaning_Service_Assignment
             List<Booking> Bookings = new List<Booking>();
             List<TimeLog> TimeLogs = new List<TimeLog>();
             List<Service> Services = new List<Service>();
+            List<MajorProblem> MajorProblemList = new List<MajorProblem>();
+            List<MinorProblem> MinorProblemList = new List<MinorProblem>();
 
             Customer SomeCustomer = new Customer("Ben", "Pople");
 
@@ -41,15 +43,14 @@ namespace Shauns_Cleaning_Service_Assignment
             Buildings.Add(building1);
             Customers.Add(SomeCustomer);
 
-            MainMenu(Admins, Bookings, Cleaners, Purchases, Buildings, Services, Customers, TimeLogs);
+            MainMenu(Admins, Bookings, Cleaners, Purchases, Buildings, Services, Customers, TimeLogs, MajorProblemList, MinorProblemList);
         }
 
-        static void MainMenu(List<Admin> AdminList, List<Booking> BookingList, List<Cleaning> CleaningList, List<Purchase> PurchaseList, List<Building> BuildingList, List<Service> ServiceList, List<Customer> CustomerList, List<TimeLog> TimeLogList)
+        static void MainMenu(List<Admin> AdminList, List<Booking> BookingList, List<Cleaning> CleaningList, List<Purchase> PurchaseList, List<Building> BuildingList, List<Service> ServiceList, List<Customer> CustomerList, List<TimeLog> TimeLogList, List<MajorProblem> MajorProblemList, List<MinorProblem> MinorProblemList)
         {
             string[] Options =
             {
                 "View Time Log",
-                "View Purchases",
                 "View Buildings",
                 "Add New Purchase",
                 "Add Time Log",
@@ -66,43 +67,39 @@ namespace Shauns_Cleaning_Service_Assignment
             {
                 case ("Update information"):
                     Console.WriteLine("Update information");
-                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList);
+                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList, MajorProblemList, MinorProblemList);
                     break;
                 case ("Add Time Log"):
                     AddTimeLog(CleaningList, TimeLogList);
-                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList);
+                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList, MajorProblemList, MinorProblemList);
                     break;
                 case ("View time log"):
                     ViewTimeLog(TimeLogList);
-                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList);
-                    break;
-                case ("View Purchases"):
-                    Console.WriteLine("View Purchases");
-                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList);
+                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList, MajorProblemList, MinorProblemList);
                     break;
                 case ("Add New Purchase"):
                     AddNewPurchase(AdminList, BookingList, CleaningList, PurchaseList);
-                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList);
+                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList, MajorProblemList, MinorProblemList);
                     break;
                 case ("Add Staff Member"):
                     AddStaffMember(AdminList, BookingList, CleaningList);
-                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList);
+                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList, MajorProblemList, MinorProblemList);
                     break;
                 case ("Add Building"):
                     AddBuilding(BuildingList, CustomerList);
-                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList);
+                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList, MajorProblemList, MinorProblemList);
                     break;
                 case ("View Buildings"):
                     ViewBuildings(BuildingList);
-                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList);
+                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList, MajorProblemList, MinorProblemList);
                     break;
                 case ("Add Service"):
                     AddService(BuildingList, ServiceList);
-                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList);
+                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList, MajorProblemList, MinorProblemList);
                     break;
                 case ("Update Information"):
                     UpdateInformation(CustomerList, BuildingList, AdminList, CleaningList);
-                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList);
+                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList, MajorProblemList, MinorProblemList);
                     break;
                 case ("Quit"):
                     Console.WriteLine("Quitting");
@@ -258,6 +255,8 @@ namespace Shauns_Cleaning_Service_Assignment
                         BComplete = false;
                     }
 
+                    string ProblemType = Prompt.Select("", new[] {"Minor", "Major"});
+
                     Customer customer = new Customer(Building.CurrentCustomer.Fname, Building.CurrentCustomer.Lname);
 
                     Service NewService = new Service(ServiceName, BComplete, customer, Building);
@@ -269,6 +268,72 @@ namespace Shauns_Cleaning_Service_Assignment
             if (found == false)
             {
                 Console.WriteLine("Invalid Address Given");
+            }
+        }
+
+        static void AddMajorProblem(List<Service> ServiceList, List<MajorProblem> MajorProblemList)
+        {
+            List<Service> Services = new List<Service>();
+
+            foreach (Service Service in ServiceList)
+            {
+                Services.Add(Service);
+            }
+
+            Service ServiceToAdd = Prompt.Select("Pick the service to add", Services);
+
+            foreach (Service Service in Services)
+            {
+                if (ServiceToAdd == Service)
+                {
+                    string IsOpen = Prompt.Input<string>("Is the issue open", new[] { "Yes", "No"});
+                    bool Open = false;
+
+                    switch (IsOpen)
+                    {
+                        case ("Yes"):
+                            Open = true;
+                            break;
+                        case ("No"):
+                            Open = false;
+                            break;
+                    }
+                    MajorProblem NewProblem = new MajorProblem(Service, Open);
+                    MajorProblemList.Add(NewProblem);
+                }
+            }
+        }
+
+        static void AddMinorProblem(List<Service> ServiceList, List<MinorProblem> MinorProblemList)
+        {
+            List<Service> Services = new List<Service>();
+
+            foreach (Service Service in ServiceList)
+            {
+                Services.Add(Service);
+            }
+
+            Service ServiceToAdd = Prompt.Select("Pick the service to add", Services);
+
+            foreach (Service Service in Services)
+            {
+                if (ServiceToAdd == Service)
+                {
+                    string IsOpen = Prompt.Input<string>("Is the issue open", new[] { "Yes", "No" });
+                    bool Open = false;
+
+                    switch (IsOpen)
+                    {
+                        case ("Yes"):
+                            Open = true;
+                            break;
+                        case ("No"):
+                            Open = false;
+                            break;
+                    }
+                    MinorProblem NewProblem = new MinorProblem(Service, Open);
+                    MinorProblemList.Add(NewProblem);
+                }
             }
         }
 
@@ -464,6 +529,7 @@ namespace Shauns_Cleaning_Service_Assignment
             Cleaning Cleaner = Prompt.Select("Select the member of staff", Clean);
 
             TimeLog NewLog = new TimeLog(Cleaner);
+            TimeLoglist.Add(NewLog);
         }
 
         static void ViewTimeLog(List<TimeLog> TimeLogList)

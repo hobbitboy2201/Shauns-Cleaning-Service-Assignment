@@ -6,16 +6,16 @@ using System.Threading.Tasks;
 
 namespace Shauns_Cleaning_Service_Assignment
 {
-    public class MajorProblem: IService
+    public class MajorProblem
     {
         public Guid Id { get; }
-        public string ServiceName { get; set; }
+        public Service ServiceName { get; set; }
         public DateTime CreatedOn { get; set; }
         public bool Open { get; set; }
         public List <Purchase> PurchaseList { get; set; }
         public Enums.IssueSeverity IssueSeverity { get; set; }
 
-        public MajorProblem(string serviceName, bool open)
+        public MajorProblem(Service serviceName, bool open)
         {
             Id = Guid.NewGuid();
             ServiceName = serviceName;

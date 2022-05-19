@@ -48,15 +48,15 @@ namespace Shauns_Cleaning_Service_Assignment
         {
             string[] Options =
             {
-                "Update Information",
-                "Add Time Log",
                 "View Time Log",
-                "Add New Purchase",
                 "View Purchases",
                 "View Buildings",
+                "Add New Purchase",
+                "Add Time Log",
                 "Add Staff Member",
                 "Add Service",
                 "Add Building",
+                "Update Information",
                 "Quit"
             };
 

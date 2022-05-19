@@ -24,6 +24,7 @@ namespace Shauns_Cleaning_Service_Assignment
             List<MinorProblem> MinorProblems = new List<MinorProblem>();
             List<Booking> Bookings = new List<Booking>();
             List<TimeLog> TimeLogs = new List<TimeLog>();
+            List<Service> Services = new List<Service>();
 
             MainMenu(Admins, Bookings, Cleaners);
             AddStaffMember(Admins, Bookings, Cleaners);
@@ -149,6 +150,7 @@ namespace Shauns_Cleaning_Service_Assignment
         static void AddNewPurchase(List<Admin> AdminList, List<Booking> BookingList, List<Cleaning> CleaningList)
         {
             string CleanerUsername = Prompt.Input<string>("What is the cleaners username");
+            bool found = false;
 
             foreach (Cleaning Cleaner in CleaningList)
             {
@@ -156,8 +158,24 @@ namespace Shauns_Cleaning_Service_Assignment
                 {
                     Cleaning TargetCleaner = Cleaner;
                     Console.WriteLine(TargetCleaner.Fname);
+                    found = true;
+
+                    string Description = Prompt.Input<string>("Purchase Description");
+                    double Cost = Prompt.Input<double>("Purchase cost");
+
+                    Purchase NewPurchase = new Purchase(Description, Cost, TargetCleaner);
                 }
             }
+
+            if(found == false)
+            {
+                Console.WriteLine($"{CleanerUsername} cleaner was not found");
+            }
+        }
+
+        static void AddSerService()
+        {
+
         }
     }
 }

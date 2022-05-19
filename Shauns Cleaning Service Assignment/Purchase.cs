@@ -13,16 +13,14 @@ namespace Shauns_Cleaning_Service_Assignment
         public double Cost { get; set; }
         public DateTime CreatedOn { get; set; }
         public Cleaning CreatedBy { get; set; }
-        public bool Open { get; set; }
 
-        public Purchase(string description, double cost, Cleaning createdBy, bool open)
+        public Purchase(string description, double cost, Cleaning createdBy)
         {
             Id = Guid.NewGuid();
             Description = description;
             Cost = cost;
             CreatedOn = DateTime.Now;
             CreatedBy = createdBy;
-            Open = open;
         }
 
         public override string ToString()

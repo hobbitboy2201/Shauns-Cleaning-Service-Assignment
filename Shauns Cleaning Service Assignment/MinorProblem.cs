@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Shauns_Cleaning_Service_Assignment
 {
-    public class MinorProblem: Service
+    public class MinorProblem: IService
     {
         public Guid Id { get; set; }
         public string ServiceName { get; set; }

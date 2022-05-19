@@ -14,15 +14,17 @@ namespace Shauns_Cleaning_Service_Assignment
         public Customer Customer { get; set; }
         public DateTime CreatedOn { get; set; }
         public bool Complete { get; set; }
+        public Building Building { get; set; }
         List<Purchase> PurchaseList { get; set; }
 
-        public Service(string serviceName, DateTime createdOn, bool complete, Customer customer)
+        public Service(string serviceName, bool complete, Customer customer, Building building)
         {
             Id = Guid.NewGuid();
             ServiceName = serviceName;
             CreatedOn = DateTime.Now;
             Complete = complete;
             Customer = customer;
+            Building = building;
             PurchaseList = new List<Purchase>();
         }
     }

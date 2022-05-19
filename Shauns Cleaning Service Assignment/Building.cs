@@ -15,12 +15,12 @@ namespace Shauns_Cleaning_Service_Assignment
         public List<Service> Services { get; set; }
         public Customer CurrentCustomer { get; set; }
 
-        public Building(string address, Nature type, List<Service> services, Customer currentCustomer)
+        public Building(string address, Nature type, Customer currentCustomer)
         {
             Id = Guid.NewGuid();
             Address = address;
             Type = type;
-            Services = services;
+            Services = new List<Service>();
             CurrentCustomer = currentCustomer;
         }
 

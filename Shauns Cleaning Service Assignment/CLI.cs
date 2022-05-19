@@ -57,6 +57,8 @@ namespace Shauns_Cleaning_Service_Assignment
                 "Add Staff Member",
                 "Add Service",
                 "Add Building",
+                "Add Major Problem",
+                "Add Minor Problem",
                 "Update Information",
                 "Quit"
             };
@@ -79,6 +81,14 @@ namespace Shauns_Cleaning_Service_Assignment
                     break;
                 case ("Add New Purchase"):
                     AddNewPurchase(AdminList, BookingList, CleaningList, PurchaseList);
+                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList, MajorProblemList, MinorProblemList);
+                    break;
+                case ("Add Major Problem"):
+                    AddMajorProblem(ServiceList, MajorProblemList);
+                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList, MajorProblemList, MinorProblemList);
+                    break;
+                case ("Add Minor Problem"):
+                    AddMinorProblem(ServiceList, MinorProblemList);
                     MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList, MajorProblemList, MinorProblemList);
                     break;
                 case ("Add Staff Member"):

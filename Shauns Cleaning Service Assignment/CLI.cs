@@ -27,8 +27,6 @@ namespace Shauns_Cleaning_Service_Assignment
 
             MainMenu(Admins, Bookings, Cleaners);
             AddStaffMember(Admins, Bookings, Cleaners);
-            AddStaffMember(Admins, Bookings, Cleaners);
-            AddStaffMember(Admins, Bookings, Cleaners);
 
             foreach (Admin admin in Admins)
                 Console.WriteLine($"{admin.Fname} {admin.Lname} Username: {admin.Username}");
@@ -90,6 +88,13 @@ namespace Shauns_Cleaning_Service_Assignment
             string Username = Prompt.Input<string>("Staff Username");
             string Password = Prompt.Input<string>("Staff Password");
 
+            while (CheckUsername(AdminList, BookingList, CleaningList, Username) == false)
+            {
+                Username = Prompt.Input<string>("New username");
+            }
+
+
+
             string StaffOptions = Prompt.Select("What type of staff member are you adding?", StaffTypes);
 
             switch (StaffOptions)
@@ -109,9 +114,50 @@ namespace Shauns_Cleaning_Service_Assignment
             }
         }
 
+        static bool CheckUsername(List<Admin> AdminList, List<Booking> BookingList, List<Cleaning> CleaningList, string Username)
+        {
+            foreach (Admin admin in AdminList)
+            {
+                if (admin.Username == Username)
+                {
+                    Console.WriteLine("Invalid username. PLease enter a new one");
+                    return false;
+                }
+            }
+
+            foreach (Cleaning cleaner in CleaningList)
+            {
+                if (cleaner.Username == Username)
+                {
+                    Console.WriteLine("Invalid username. PLease enter a new one");
+                    return false;
+                }
+            }
+
+            foreach (Booking booking in BookingList)
+            {
+                if (booking.Username == Username)
+                {
+                    Console.WriteLine("Invalid username. PLease enter a new one");
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
         static void AddNewPurchase(List<Admin> AdminList, List<Booking> BookingList, List<Cleaning> CleaningList)
         {
+            string CleanerUsername = Prompt.Input<string>("What is the cleaners username");
 
+            foreach (Cleaning Cleaner in CleaningList)
+            {
+                if (Cleaner.Username == CleanerUsername)
+                {
+                    Cleaning TargetCleaner = Cleaner;
+                    Console.WriteLine(TargetCleaner.Fname);
+                }
+            }
         }
     }
 }

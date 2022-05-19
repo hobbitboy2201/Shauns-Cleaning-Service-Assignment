@@ -28,6 +28,8 @@ namespace Shauns_Cleaning_Service_Assignment
             List<MajorProblem> MajorProblemList = new List<MajorProblem>();
             List<MinorProblem> MinorProblemList = new List<MinorProblem>();
 
+            List<string> names = new List<string>();
+
             Customer SomeCustomer = new Customer("Ben", "Pople");
 
             Building building1 = new Building("Oxford", Nature.DOMESTIC, SomeCustomer);

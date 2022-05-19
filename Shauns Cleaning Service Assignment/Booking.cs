@@ -25,5 +25,10 @@ namespace Shauns_Cleaning_Service_Assignment
             Password = password;
             Type = StaffType.BOOKING;
         }
+
+        public override string ToString()
+        {
+            return $"{Fname} {Lname}";
+        }
     }
 }

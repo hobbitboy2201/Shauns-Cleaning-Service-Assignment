@@ -26,18 +26,31 @@ namespace Shauns_Cleaning_Service_Assignment
             List<TimeLog> TimeLogs = new List<TimeLog>();
             List<Service> Services = new List<Service>();
 
-            MainMenu(Admins, Bookings, Cleaners, Purchases, Buildings, Services);
+            Customer SomeCustomer = new Customer("Ben", "Pople");
 
-            foreach (Admin admin in Admins)
-                Console.WriteLine($"{admin.Fname} {admin.Lname} Username: {admin.Username}");
+            Building building1 = new Building("Oxford", Nature.DOMESTIC, SomeCustomer);
+
+            Service Service1 = new Service("Test1", false, SomeCustomer, building1);
+            Service Service2 = new Service("Test69", true, SomeCustomer, building1);
+            Cleaning Cleaner1 = new Cleaning("Jim", "Baggings", "Jim123", "Jim123");
+
+            building1.Services.Add(Service1);
+            building1.Services.Add(Service2);
+
+            Cleaners.Add(Cleaner1);
+            Buildings.Add(building1);
+            Customers.Add(SomeCustomer);
+
+            MainMenu(Admins, Bookings, Cleaners, Purchases, Buildings, Services, Customers, TimeLogs);
         }
 
-        static void MainMenu(List<Admin> AdminList, List<Booking> BookingList, List<Cleaning> CleaningList, List<Purchase> PurchaseList, List<Building> BuildingList, List<Service> ServiceList)
+        static void MainMenu(List<Admin> AdminList, List<Booking> BookingList, List<Cleaning> CleaningList, List<Purchase> PurchaseList, List<Building> BuildingList, List<Service> ServiceList, List<Customer> CustomerList, List<TimeLog> TimeLogList)
         {
             string[] Options =
             {
-                "Update information",
-                "View time log",
+                "Update Information",
+                "Add Time Log",
+                "View Time Log",
                 "Add New Purchase",
                 "View Purchases",
                 "View Buildings",
@@ -53,35 +66,43 @@ namespace Shauns_Cleaning_Service_Assignment
             {
                 case ("Update information"):
                     Console.WriteLine("Update information");
-                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList);
+                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList);
+                    break;
+                case ("Add Time Log"):
+                    AddTimeLog(CleaningList, TimeLogList);
+                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList);
                     break;
                 case ("View time log"):
-                    Console.WriteLine("Time log");
-                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList);
+                    ViewTimeLog(TimeLogList);
+                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList);
                     break;
                 case ("View Purchases"):
                     Console.WriteLine("View Purchases");
-                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList);
+                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList);
                     break;
                 case ("Add New Purchase"):
                     AddNewPurchase(AdminList, BookingList, CleaningList, PurchaseList);
-                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList);
+                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList);
                     break;
                 case ("Add Staff Member"):
                     AddStaffMember(AdminList, BookingList, CleaningList);
-                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList);
+                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList);
                     break;
                 case ("Add Building"):
-                    AddBuilding(BuildingList);
-                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList);
+                    AddBuilding(BuildingList, CustomerList);
+                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList);
                     break;
                 case ("View Buildings"):
                     ViewBuildings(BuildingList);
-                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList);
+                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList);
                     break;
                 case ("Add Service"):
                     AddService(BuildingList, ServiceList);
-                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList);
+                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList);
+                    break;
+                case ("Update Information"):
+                    UpdateInformation(CustomerList, BuildingList, AdminList, CleaningList);
+                    MainMenu(AdminList, BookingList, CleaningList, PurchaseList, BuildingList, ServiceList, CustomerList, TimeLogList);
                     break;
                 case ("Quit"):
                     Console.WriteLine("Quitting");
@@ -190,7 +211,7 @@ namespace Shauns_Cleaning_Service_Assignment
             }
         }
 
-        static void AddBuilding(List<Building> BuildingList)
+        static void AddBuilding(List<Building> BuildingList, List<Customer> CustomerList)
         {
 
             Nature[] Types = { Nature.DOMESTIC, Nature.COMMERCIAL};
@@ -205,6 +226,7 @@ namespace Shauns_Cleaning_Service_Assignment
 
             Building Newuilding = new Building(Address, Type, customer);
 
+            CustomerList.Add(customer);
             BuildingList.Add(Newuilding);
         }
 
@@ -260,18 +282,196 @@ namespace Shauns_Cleaning_Service_Assignment
                 foreach (Service service in building.Services)
                 {
                     Console.WriteLine(service);
+                    Console.WriteLine();
                 }
             }
         }
 
-        static void ViewTimeLog()
+
+
+        static void UpdateInformation(List<Customer> CustomerList, List<Building> BuildingList, List<Admin> AdminList, List<Cleaning> CleanerList)
         {
+            string[] Information =
+            {
+                "Customer",
+                "Building",
+                "Admins",
+                "Cleaners"
+            };
+
+            string UpdateChoice = Prompt.Select("What infomration would you like to update", Information);
+
+            switch (UpdateChoice)
+            {
+                case ("Customer"):
+                    UpdateCustomer(CustomerList);
+                    break;
+                case ("Building"):
+                    UpdateBuilding(BuildingList, CustomerList);
+                    break;
+                case ("Admins"):
+                    UpdateAdmins(AdminList);
+                    break;
+                case ("Cleaners"):
+                    UpdateCleaning(CleanerList);
+                    break;
+            }
 
         }
 
-        static void UpdateInformation()
+        static void UpdateAdmins(List<Admin> AdminList)
+        {
+            List<Admin> admins = new List<Admin>();
+
+            foreach (Admin admin in admins)
+            {
+                admins.Add(admin);
+            }
+
+            Admin AdminToChange = Prompt.Select("Please select the admin", admins);
+
+            foreach (Admin admin in admins)
+            {
+                if (AdminToChange == admin)
+                {
+                    admin.Fname = Prompt.Input<string>("Enter a new first name");
+                    admin.Lname = Prompt.Input<string>("Enter a new last name");
+                    admin.Username = Prompt.Input<string>("Enter a new username");
+                    admin.Password = Prompt.Input<string>("Enter a new password");
+                }
+                Console.WriteLine(admin);
+            }
+        }
+
+        static void UpdateCleaning(List<Cleaning> CleaningList)
         {
 
+            List<Cleaning> Cleaners = new List<Cleaning>();
+
+            foreach (Cleaning Clean in CleaningList)
+            {
+                Cleaners.Add(Clean);
+            }
+
+            Cleaning CleanerToChange = Prompt.Select("Select the cleaner to change", Cleaners);
+
+            foreach (Cleaning cleaner in CleaningList)
+            {
+                if (CleanerToChange == cleaner)
+                {
+                    Console.WriteLine("Test");
+                    Console.WriteLine(1);
+                    cleaner.Fname = Prompt.Input<string>("Enter a new first name");
+                    Console.WriteLine(2);
+                    cleaner.Lname = Prompt.Input<string>("Enter a new last name");
+                    cleaner.Username = Prompt.Input<string>("Enter a new username");
+                    cleaner.Password = Prompt.Input<string>("Enter a new password");
+                }
+                Console.WriteLine(cleaner);
+            }
+        }
+
+        static void UpdateCustomer(List<Customer> CustomerList)
+        {
+            string[] Customers = {};
+
+            foreach (Customer name in CustomerList)
+            {
+                Customers.ToArray();
+            }
+
+            Customer CustomerToChange = Prompt.Select("Please select the customer", CustomerList);
+
+            foreach (Customer customer in CustomerList)
+            {
+                if (CustomerToChange == customer)
+                {
+                    customer.Fname = Prompt.Input<string>("Enter a new first name");
+                    customer.Lname = Prompt.Input<string>("Enter a new last name");
+
+                    Console.WriteLine(customer);
+                }
+            }
+        }
+
+        static void UpdateBuilding(List<Building>BuildingList, List<Customer> CustomerList)
+        {
+            string[] Customers = { };
+
+            foreach (Customer name in CustomerList)
+            {
+                Customers.ToArray();
+            }
+
+            string[] Buildings = { };
+            Nature[] Type =
+            {
+                Nature.DOMESTIC,
+                Nature.COMMERCIAL
+            };
+
+            foreach (Building building in BuildingList)
+            {
+                Buildings.ToArray();
+            }
+
+            //string CustomerToEdit = Prompt.Input<string>("");
+
+            Building BuildingToChange = Prompt.Select("Please select the customer", BuildingList);
+
+            foreach (Building building in BuildingList)
+            {
+                if (BuildingToChange == building)
+                {
+                    building.Address = Prompt.Input<string>("Enter a new Address");
+                    building.Type = Prompt.Select("Enter a new building type", Type);
+                    building.CurrentCustomer = Prompt.Select("Please select a new customer", CustomerList);
+
+                    foreach (Service service in building.Services)
+                    {
+                        Console.WriteLine(service);
+                        service.ServiceName = Prompt.Input<string>("Enter a new service name");
+                        service.Customer = building.CurrentCustomer;
+
+                        string[] CompleteOptions =
+                        {
+                            "Yes",
+                            "No"
+                        };
+
+                        string Choice = Prompt.Select("Is the service complete?", CompleteOptions);
+
+                        switch (Choice)
+                        {
+                            case ("Yes"):
+                                service.Complete = true;
+                                break;
+                            case ("No"):
+                                service.Complete = false;
+                                break;
+                        }
+                    }
+
+                    Console.WriteLine(building);
+                }
+            }
+        }
+
+        static void AddTimeLog(List<Cleaning> CleaningList, List<TimeLog> TimeLoglist)
+        {
+            List<Cleaning> Clean = new List<Cleaning>();
+
+            Cleaning Cleaner = Prompt.Select("Select the member of staff", Clean);
+
+            TimeLog NewLog = new TimeLog(Cleaner);
+        }
+
+        static void ViewTimeLog(List<TimeLog> TimeLogList)
+        {
+            foreach (TimeLog Logs in TimeLogList)
+            {
+                Console.WriteLine(Logs);
+            }
         }
         static void Quit()
         {

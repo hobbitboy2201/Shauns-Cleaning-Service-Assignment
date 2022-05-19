@@ -18,5 +18,10 @@ namespace Shauns_Cleaning_Service_Assignment
             Fname = fname;
             Lname = lname;
         }
+
+        public override string? ToString()
+        {
+            return $"{Fname} {Lname}";
+        }
     }
 }

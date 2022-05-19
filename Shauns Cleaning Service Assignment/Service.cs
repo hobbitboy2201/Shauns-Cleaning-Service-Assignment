@@ -27,5 +27,10 @@ namespace Shauns_Cleaning_Service_Assignment
             Building = building;
             PurchaseList = new List<Purchase>();
         }
+
+        public override string ToString()
+        {
+            return $"ServiceName: {ServiceName}   Created On {CreatedOn}";
+        }
     }
 }

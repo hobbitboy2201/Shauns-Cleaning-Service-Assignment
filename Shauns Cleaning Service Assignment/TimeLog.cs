@@ -9,14 +9,12 @@ namespace Shauns_Cleaning_Service_Assignment
     public class TimeLog
     {
         public Guid Id { get; set; }
-        public int AmountOfMins { get; set; }
         public DateTime LoggedOn { get; set; }
         public Cleaning StaffMember { get; set; }
 
-        public TimeLog(int amountOfMins, Cleaning staffMember)
+        public TimeLog(Cleaning staffMember)
         {
             Id = Guid.NewGuid();
-            AmountOfMins = amountOfMins;
             LoggedOn = DateTime.Now;
             StaffMember = staffMember;
         }

@@ -51,5 +51,13 @@ namespace Unit_Tests
 
             Assert.Equal($"Lig Ma", TestString);
         }
+        [Fact]
+        public void MaintenanceUNitTest()
+        {
+            Booking TestBooking = new Booking("Lig", "Ma", "Ha", "Got'em");
+            string TestString = TestBooking.ToString();
+
+            Assert.Equal($"Lig Ma", TestString);
+        }
     }
 }

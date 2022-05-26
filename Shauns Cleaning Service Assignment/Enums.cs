@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Shauns_Cleaning_Service_Assignment
 {
+    //Defining a new public class Enums
     public class Enums
     {
+        //Declaring the 3 public enum variables that will be used by the other classes within this program
         public enum Nature
         {
             DOMESTIC,

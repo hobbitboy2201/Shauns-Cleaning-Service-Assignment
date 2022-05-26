@@ -7,8 +7,10 @@ using static Shauns_Cleaning_Service_Assignment.Enums;
 
 namespace Shauns_Cleaning_Service_Assignment
 {
-    public class Cleaning : IPerson, IStaff
+    //Defining a new public class Cleaning
+    public class Cleaning : IPerson, IStaff //This class uses the interfaces IPerson, IStaff
     {
+        //Declaring the variables that will be needed for this class
         public Guid Id { get; set; }
         public string Fname { get; set; }
         public string Lname { get; set; }
@@ -16,6 +18,7 @@ namespace Shauns_Cleaning_Service_Assignment
         public string Password { get; set; }
         public StaffType Type { get; set; }
 
+        //Creating the constructor for this class
         public Cleaning(string fname, string lname, string username, string password)
         {
             Id = Guid.NewGuid();
@@ -26,6 +29,7 @@ namespace Shauns_Cleaning_Service_Assignment
             Type = StaffType.CLEANING;
         }
 
+        //Overriding the ToString() method ,allowing me to print out the information that I want instead of the base information for this class
         public override string? ToString()
         {
             return $"{Fname} {Lname}";

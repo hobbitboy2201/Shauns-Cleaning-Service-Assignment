@@ -668,7 +668,7 @@ namespace Shauns_Cleaning_Service_Assignment
             //Cleates a new TimeLog for the selected Cleaner
             TimeLog NewLog = new TimeLog(Cleaner);
             //Adds the new TimeLog to the List<TimeLog> TimeLogList
-            TimeLoglist.Add(NewLog);
+            TimeLoglist.Add(NewLog); 
         }
 
         //Creates a new function ViewTimeLog

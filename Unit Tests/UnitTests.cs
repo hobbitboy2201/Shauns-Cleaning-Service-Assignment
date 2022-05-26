@@ -28,14 +28,6 @@ namespace Unit_Tests
             Assert.Equal($"Test Description  Created By: Simon Minter at {DateTime.Now}  Cost: 20", TestString);
         }
         [Fact]
-        public void CleaningUnitTest()
-        {
-            Cleaning TestCleaner = new Cleaning("Jack", "Hine", "Username123", "Password123");
-            string TestString = TestCleaner.ToString();
-
-            Assert.Equal($"Jack Hine", TestString);
-        }
-        [Fact]
         public void AdminUnitTest()
         {
             Admin TestAdmin = new Admin("Ben", "Pople", "Jam23", "BooBoo69");
@@ -59,5 +51,6 @@ namespace Unit_Tests
 
             Assert.Equal($"Lig Ma", TestString);
         }
+
     }
 }

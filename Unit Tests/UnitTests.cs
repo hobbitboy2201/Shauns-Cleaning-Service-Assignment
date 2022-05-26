@@ -36,7 +36,7 @@ namespace Unit_Tests
             Assert.Equal($"Ben Pople", TestString);
         }
         [Fact]
-        public void BookingUNitTest()
+        public void BookingUnitTest()
         {
             Booking TestBooking = new Booking("Lig", "Ma", "Ha", "Got'em");
             string TestString = TestBooking.ToString();

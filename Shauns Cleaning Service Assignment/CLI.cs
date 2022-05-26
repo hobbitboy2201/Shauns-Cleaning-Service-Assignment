@@ -484,7 +484,7 @@ namespace Shauns_Cleaning_Service_Assignment
                     break;
             }
 
-        }
+        } 
 
         //Creates a new function UpdateInformation
         //The function requires 1 list, List<Admin>
